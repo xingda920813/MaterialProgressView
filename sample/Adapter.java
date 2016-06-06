@@ -23,7 +23,7 @@ public abstract class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     protected abstract void onViewHolderBind(RecyclerView.ViewHolder holder, int position, int viewType);
     protected abstract int getViewType(int position);
     protected abstract int getCount();
-    protected abstract int getItemSpanSizeForGrid(int position, int viewType);
+    protected abstract int getItemSpanSizeForGrid(int position, int viewType, int spanCount);
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -91,33 +91,33 @@ public abstract class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     protected abstract class ProgressSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
 
-        protected int spanSize;
+        protected int spanCount;
 
-        protected ProgressSpanSizeLookup(int spanSize) {
-            this.spanSize = spanSize;
+        protected ProgressSpanSizeLookup(int spanCount) {
+            this.spanCount = spanCount;
         }
 
         @Override
         public int getSpanSize(int position) {
             int viewType = getItemViewType(position);
             if (viewType == 65535) {
-                return spanSize;
+                return spanCount;
             } else {
-                int itemSpanSize = getItemSpanSize(position, viewType);
+                int itemSpanSize = getItemSpanSize(position, viewType, spanCount);
                 if (itemSpanSize < 1) itemSpanSize = 1;
-                if (itemSpanSize > spanSize) itemSpanSize = spanSize;
+                if (itemSpanSize > spanCount) itemSpanSize = spanCount;
                 return itemSpanSize;
             }
         }
 
-        protected abstract int getItemSpanSize(int position, int viewType);
+        protected abstract int getItemSpanSize(int position, int viewType, int spanCount);
     }
 
-    public ProgressSpanSizeLookup getSpanSizeLookup(int spanSize) {
-        return new ProgressSpanSizeLookup(spanSize) {
+    public ProgressSpanSizeLookup getSpanSizeLookup(int spanCount) {
+        return new ProgressSpanSizeLookup(spanCount) {
             @Override
-            protected int getItemSpanSize(int position, int viewType) {
-                return getItemSpanSizeForGrid(position, viewType);
+            protected int getItemSpanSize(int position, int viewType, int spanCount) {
+                return getItemSpanSizeForGrid(position, viewType, spanCount);
             }
         };
     }
