@@ -21,10 +21,7 @@ Adapter和ProgressViewHolder示例详见sample.
 
 ## 引入
 
-通过jar包引入：引入MaterialProgressView-1.0.0.jar，同时在build.gradle中添加compile 'com.android.support:appcompat-v7:${latest.version}'
-
-通过jcenter引入（推荐）：直接在build.gradle中添加
+build.gradle中添加
 
     compile 'com.xdandroid:materialprogressview:+'
-	compile 'com.android.support:appcompat-v7:${latest.version}'
 
