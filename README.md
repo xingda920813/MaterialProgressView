@@ -1,4 +1,4 @@
-# MaterialProgressView
+﻿# MaterialProgressView
 ### 具有 SwipeRefreshLayout 样式的转圈动画。
 
 #### CircleImageView和MaterialProgressDrawable来自于AOSP的support-v4包，精简了用不到的成员变量和方法。
@@ -25,6 +25,6 @@ Adapter和ProgressViewHolder示例详见sample.
 
 通过jcenter引入（推荐）：直接在build.gradle中添加
 
-    compile 'com.xdandroid:materialprogressview:1.0.0'
+    compile 'com.xdandroid:materialprogressview:+'
 	compile 'com.android.support:appcompat-v7:${latest.version}'
 
