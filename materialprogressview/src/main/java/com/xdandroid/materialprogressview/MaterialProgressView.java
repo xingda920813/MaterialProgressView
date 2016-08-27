@@ -1,14 +1,12 @@
 package com.xdandroid.materialprogressview;
 
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.os.Build;
-import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.view.View;
-import android.widget.RelativeLayout;
+import android.content.*;
+import android.os.*;
+import android.support.annotation.*;
+import android.util.*;
+import android.view.*;
 
-public class MaterialProgressView extends RelativeLayout {
+public class MaterialProgressView extends ViewGroup {
 
     protected CircleImageView mCircleView;
     protected MaterialProgressDrawable mProgress;
@@ -33,13 +31,14 @@ public class MaterialProgressView extends RelativeLayout {
         initProgressView();
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public MaterialProgressView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initProgressView();
     }
 
     protected void initProgressView() {
+        setWillNotDraw(false);
         createProgressView();
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         mCircleHeight = mCircleWidth = (int) (CIRCLE_DIAMETER * metrics.density);
@@ -52,18 +51,24 @@ public class MaterialProgressView extends RelativeLayout {
         mProgress = new MaterialProgressDrawable(getContext(), this);
         mProgress.setBackgroundColor(CIRCLE_BG_LIGHT);
         mCircleView.setImageDrawable(mProgress);
-        mCircleView.setVisibility(View.VISIBLE);
+        mCircleView.getBackground().setAlpha(255);
         mProgress.setAlpha(255);
         addView(mCircleView);
     }
 
-    public void setColorSchemeColors(int[] colors) {
+    public void setProgressBackgroundColor(@ColorInt int color) {
+        mCircleView.setBackgroundColor(color);
+        mProgress.setBackgroundColor(color);
+    }
+
+    public void setColorSchemeColors(@ColorInt int[] colors) {
         mProgress.setColorSchemeColors(colors);
     }
 
     @Override
     public void setVisibility(int visibility) {
         if (visibility == GONE || visibility == INVISIBLE) {
+            mCircleView.clearAnimation();
             mProgress.stop();
         } else {
             mProgress.start();
@@ -74,21 +79,15 @@ public class MaterialProgressView extends RelativeLayout {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
         int width = getMeasuredWidth();
         int circleWidth = mCircleView.getMeasuredWidth();
         int circleHeight = mCircleView.getMeasuredHeight();
         mCircleView.layout((width / 2 - circleWidth / 2), 0, (width / 2 + circleWidth / 2), circleHeight);
     }
 
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.AT_MOST || MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST) {
-            super.onMeasure(MeasureSpec.makeMeasureSpec(mCircleWidth + mExtraShadowSpace, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(mCircleHeight + mExtraShadowSpace, MeasureSpec.EXACTLY));
-        } else {
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        }
+        setMeasuredDimension(mCircleWidth + mExtraShadowSpace, mCircleHeight + mExtraShadowSpace);
         mCircleView.measure(MeasureSpec.makeMeasureSpec(mCircleWidth, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(mCircleHeight, MeasureSpec.EXACTLY));
     }
 }

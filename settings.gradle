@@ -1,1 +1,1 @@
-include ':materialprogressview'
+include ':materialprogressview', ':sample'

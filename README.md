@@ -3,15 +3,18 @@
 
 #### CircleImageView和MaterialProgressDrawable来自于AOSP的support-v4包，精简了用不到的成员变量和方法。
 
-![https://raw.githubusercontent.com/xingda920813/MaterialProgressView/master/videomaterial.gif](https://raw.githubusercontent.com/xingda920813/MaterialProgressView/master/videomaterial.gif)
+![https://raw.githubusercontent.com/xingda920813/MaterialProgressView/master/video.gif](https://raw.githubusercontent.com/xingda920813/MaterialProgressView/master/video.gif)
 
 #### 支持wrap\_content和LayoutParams.WRAP_CONTENT;
 
-#### 可自定义颜色 :
+#### 可自定义转圈的颜色和转圈所在圆形突起的背景色 :
 
-	materialProgressView.setColorSchemeColors(new int[]{getResources().getColor(R.color.colorAccent)});
-
-若int[]中的颜色值多于一个，将按顺序轮换显示不同颜色的转圈，每转一圈换一种颜色。
+```
+//设置转圈的颜色为蓝红两色渐变交替
+progressView.setColorSchemeColors(new int[]{getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.colorAccent)});
+//设置转圈所在圆形突起的背景色为默认的浅灰色
+progressView.setProgressBackgroundColor(Color.parseColor("#FAFAFA"));
+```
 
 #### setVisibility具有与ProgressBar相同的行为：setVisibility(int visibility)中参数为View.INVISIBLE或View.GONE时，停止动画并复位状态（圆弧颜色和旋转的程度），参数为View.VISIBLE时，开始动画。
 

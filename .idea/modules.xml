@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MaterialProgressView.iml" filepath="$PROJECT_DIR$/MaterialProgressView.iml" />
       <module fileurl="file://$PROJECT_DIR$/materialprogressview/materialprogressview.iml" filepath="$PROJECT_DIR$/materialprogressview/materialprogressview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
     </modules>
   </component>
 </project>
