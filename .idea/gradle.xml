@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/materialprogressview" />
           </set>
         </option>
+        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

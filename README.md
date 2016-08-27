@@ -3,11 +3,11 @@
 
 #### CircleImageView和MaterialProgressDrawable来自于AOSP的support-v4包，精简了用不到的成员变量和方法。
 
-![Alt text](https://raw.githubusercontent.com/xingda920813/SimpleRecyclerView/master/videomaterial.gif)
+![https://raw.githubusercontent.com/xingda920813/MaterialProgressView/master/videomaterial.gif](https://raw.githubusercontent.com/xingda920813/MaterialProgressView/master/videomaterial.gif)
 
 #### 支持wrap\_content和LayoutParams.WRAP_CONTENT;
 
-#### 可自定义颜色 : 
+#### 可自定义颜色 :
 
 	materialProgressView.setColorSchemeColors(new int[]{getResources().getColor(R.color.colorAccent)});
 
@@ -24,4 +24,3 @@ Adapter和ProgressViewHolder示例详见sample.
 build.gradle中添加
 
     compile 'com.xdandroid:materialprogressview:+'
-
