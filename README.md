@@ -1,19 +1,22 @@
 ﻿# MaterialProgressView
-### 具有 SwipeRefreshLayout 样式的转圈动画。
 
-#### CircleImageView和MaterialProgressDrawable来自于AOSP的support-v4包，精简了用不到的成员变量和方法。
+### 具有 SwipeRefreshLayout 样式的转圈动画
+
+#### 修改自 support-core-ui-25.0.1
 
 ![https://raw.githubusercontent.com/xingda920813/MaterialProgressView/master/video.gif](https://raw.githubusercontent.com/xingda920813/MaterialProgressView/master/video.gif)
 
 #### 支持wrap\_content和LayoutParams.WRAP_CONTENT;
 
-#### 可自定义转圈的颜色和转圈所在圆形突起的背景色 :
+#### 可自定义转圈的颜色和转圈所在圆形突起的背景色，可自定义透明度：
 
 ```
 //设置转圈的颜色为蓝红两色渐变交替
-progressView.setColorSchemeColors(new int[]{getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.colorAccent)});
+mProgressView.setColorSchemeColors(new int[]{getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.colorAccent)});
 //设置转圈所在圆形突起的背景色为默认的浅灰色
-progressView.setProgressBackgroundColor(Color.parseColor("#FAFAFA"));
+mProgressView.setProgressBackgroundColor(Color.parseColor("#FAFAFA"));
+//设置透明度(0-255, 默认为255不透明)
+mProgressView.setColorViewAlpha(255);
 ```
 
 #### setVisibility具有与ProgressBar相同的行为：setVisibility(int visibility)中参数为View.INVISIBLE或View.GONE时，停止动画并复位状态（圆弧颜色和旋转的程度），参数为View.VISIBLE时，开始动画。

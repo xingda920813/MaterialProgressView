@@ -12,8 +12,7 @@ public class MaterialProgressView extends ViewGroup {
     protected MaterialProgressDrawable mProgress;
     protected static final int CIRCLE_BG_LIGHT = 0xFFFAFAFA;
     protected static final int CIRCLE_DIAMETER = 40;
-    protected int mCircleWidth;
-    protected int mCircleHeight;
+    protected int mCircleDiameter;
     protected int mExtraShadowSpace;
 
     public MaterialProgressView(Context context) {
@@ -39,21 +38,25 @@ public class MaterialProgressView extends ViewGroup {
 
     protected void initProgressView() {
         setWillNotDraw(false);
-        createProgressView();
         DisplayMetrics metrics = getResources().getDisplayMetrics();
-        mCircleHeight = mCircleWidth = (int) (CIRCLE_DIAMETER * metrics.density);
+        mCircleDiameter = (int) (CIRCLE_DIAMETER * metrics.density);
         mExtraShadowSpace = (int) ((0.1333 * CIRCLE_DIAMETER) * metrics.density);
+        createProgressView();
         setVisibility(VISIBLE);
     }
 
     protected void createProgressView() {
-        mCircleView = new CircleImageView(getContext(), CIRCLE_BG_LIGHT, CIRCLE_DIAMETER / 2);
+        mCircleView = new CircleImageView(getContext(), CIRCLE_BG_LIGHT);
         mProgress = new MaterialProgressDrawable(getContext(), this);
         mProgress.setBackgroundColor(CIRCLE_BG_LIGHT);
         mCircleView.setImageDrawable(mProgress);
-        mCircleView.getBackground().setAlpha(255);
-        mProgress.setAlpha(255);
+        setColorViewAlpha(255);
         addView(mCircleView);
+    }
+
+    public void setColorViewAlpha(int targetAlpha) {
+        mCircleView.getBackground().setAlpha(targetAlpha);
+        mProgress.setAlpha(targetAlpha);
     }
 
     public void setProgressBackgroundColor(@ColorInt int color) {
@@ -72,7 +75,6 @@ public class MaterialProgressView extends ViewGroup {
             mProgress.stop();
         } else {
             mProgress.start();
-            mProgress.showArrow(true);
         }
         super.setVisibility(visibility);
     }
@@ -87,7 +89,8 @@ public class MaterialProgressView extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(mCircleWidth + mExtraShadowSpace, mCircleHeight + mExtraShadowSpace);
-        mCircleView.measure(MeasureSpec.makeMeasureSpec(mCircleWidth, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(mCircleHeight, MeasureSpec.EXACTLY));
+        mCircleView.measure(MeasureSpec.makeMeasureSpec(mCircleDiameter, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(mCircleDiameter, MeasureSpec.EXACTLY));
+        setMeasuredDimension(mCircleDiameter + mExtraShadowSpace, mCircleDiameter + mExtraShadowSpace);
     }
 }
