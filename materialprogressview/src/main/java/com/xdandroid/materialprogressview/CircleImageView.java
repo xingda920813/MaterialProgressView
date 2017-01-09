@@ -37,8 +37,7 @@ public class CircleImageView extends ImageView {
             OvalShape oval = new OvalShadow(mShadowRadius);
             circle = new ShapeDrawable(oval);
             ViewCompat.setLayerType(this, ViewCompat.LAYER_TYPE_SOFTWARE, circle.getPaint());
-            circle.getPaint().setShadowLayer(mShadowRadius, shadowXOffset, shadowYOffset,
-                    KEY_SHADOW_COLOR);
+            circle.getPaint().setShadowLayer(mShadowRadius, shadowXOffset, shadowYOffset, KEY_SHADOW_COLOR);
             final int padding = mShadowRadius;
             setPadding(padding, padding, padding, padding);
         }
@@ -53,20 +52,16 @@ public class CircleImageView extends ImageView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        if (!elevationSupported()) {
-            setMeasuredDimension(getMeasuredWidth() + mShadowRadius * 2, getMeasuredHeight()
-                    + mShadowRadius * 2);
-        }
+        if (!elevationSupported()) setMeasuredDimension(getMeasuredWidth() + mShadowRadius * 2, getMeasuredHeight() + mShadowRadius * 2);
     }
 
     @Override
     public void setBackgroundColor(int color) {
-        if (getBackground() instanceof ShapeDrawable) {
-            ((ShapeDrawable) getBackground()).getPaint().setColor(color);
-        }
+        if (getBackground() instanceof ShapeDrawable) ((ShapeDrawable) getBackground()).getPaint().setColor(color);
     }
 
     public class OvalShadow extends OvalShape {
+
         protected RadialGradient mRadialGradient;
         protected Paint mShadowPaint;
 
