@@ -1,32 +1,36 @@
 ﻿# MaterialProgressView
 
-### 具有 SwipeRefreshLayout 样式的转圈动画
+[中文 README](https://github.com/xingda920813/MaterialProgressView/blob/master/README_zh.md)
 
-#### 修改自 support-core-ui-25.0.1
+### A ProgressView with SwipeRefreshLayout style.
+
+#### Modified form support-core-ui-25.1.1
 
 ![https://raw.githubusercontent.com/xingda920813/MaterialProgressView/master/video.gif](https://raw.githubusercontent.com/xingda920813/MaterialProgressView/master/video.gif)
 
-#### 支持wrap\_content和LayoutParams.WRAP_CONTENT;
+#### Supports wrap\_content and LayoutParams.WRAP_CONTENT;
 
-#### 可自定义转圈的颜色和转圈所在圆形突起的背景色，可自定义透明度：
+#### Customizable indicator color, background color and alpha;
 
 ```
-//设置转圈的颜色为蓝红两色渐变交替
+//Set indicator color to blue -> red -> blue -> red -> ...
 mProgressView.setColorSchemeColors(new int[]{getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.colorAccent)});
-//设置转圈所在圆形突起的背景色为默认的浅灰色
+//Set background color to lighter gray
 mProgressView.setProgressBackgroundColor(Color.parseColor("#FAFAFA"));
-//设置透明度(0-255, 默认为255不透明)
+//Set alpha (0-255, default: 255 opaque)
 mProgressView.setColorViewAlpha(255);
 ```
 
-#### setVisibility具有与ProgressBar相同的行为：setVisibility(int visibility)中参数为View.INVISIBLE或View.GONE时，停止动画并复位状态（圆弧颜色和旋转的程度），参数为View.VISIBLE时，开始动画。
+#### setVisibility has the same behavior as ProgressBar：When View.INVISIBLE or View.GONE is passed to setVisibility(int visibility), animation will stop and the status of progress view will be reset (indicator color and spinning degree); When View.VISIBLE is passed to the method, animation will start.
 
-因此可用于RecyclerView.Adapter的ProgressViewHolder，用于加载更多指示器的实现。加载完成后，调用MaterialProgressView.setVisibility(View.INVISIBLE / View.GONE)；开始加载时，调用MaterialProgressView.setVisibility(View.VISIBLE)，因为状态已重置过，所以动画将从头播放、颜色也会取int[]中的第一种颜色，然后每转一圈换一种颜色。
+So it can be used as a ProgressViewHolder for RecyclerView.Adapter, to implement a load-more indicator. After you loaded more data to your RecyclerView, invoke MaterialProgressView.setVisibility(View.INVISIBLE / View.GONE); When you start to load more data from network, invoke MaterialProgressView.setVisibility(View.VISIBLE).
 
-Adapter和ProgressViewHolder示例详见sample.
+The status of progress view was reset when you last time invoke MaterialProgressView.setVisibility(View.INVISIBLE / View.GONE), so this time the call to MaterialProgressView.setVisibility(View.VISIBLE) will cause animation to start from beginning and indicator color to iterate from the int[] you have passed to before, starts from the first color in the int[].
 
-## 引入
+For usage of Adapter and ProgressViewHolder, please refer to the sample.
 
-build.gradle中添加
+## Import
+
+In your build.gradle, add:
 
     compile 'com.xdandroid:materialprogressview:+'
