@@ -20,13 +20,13 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.button0).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                progressView.setColorSchemeColors(new int[]{MainActivity.this.getResources().getColor(R.color.colorPrimary), MainActivity.this.getResources().getColor(R.color.colorAccent)});
+                progressView.setColorSchemeColors(new int[]{getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.colorAccent)});
                 progressView.setProgressBackgroundColor(Color.parseColor("#FAFAFA"));
             }
         });
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                progressView.setColorSchemeColors(new int[]{MainActivity.this.getResources().getColor(android.R.color.darker_gray)});
+                progressView.setColorSchemeColors(new int[]{getResources().getColor(android.R.color.darker_gray)});
                 progressView.setProgressBackgroundColor(Color.parseColor("#333333"));
             }
         });
