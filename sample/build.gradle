@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:+'
-    compile 'com.android.support:design:+'
-    compile project(':materialprogressview')
+    api 'com.android.support:appcompat-v7:+'
+    api 'com.android.support:design:+'
+    api project(':materialprogressview')
 }
